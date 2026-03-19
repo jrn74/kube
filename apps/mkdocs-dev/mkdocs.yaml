@@ -1,5 +1,5 @@
 site_name: "- Nerstuff Dev -"
 theme:
   name: readthedocs
-
-#change
+nav:
+  - Home: index.md
