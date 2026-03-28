@@ -25,17 +25,21 @@ spec:
         ports:
         - containerPort: 8000
           name: http
-        volumeMounts:
-        - name: mkdocs-dev-storage
-          mountPath: /app
-        # 2. Inject the config file
-        - name: content-volume
-          mountPath: /app/mkdocs.yml
-          subPath: mkdocs.yml
-        # 3. Inject the home page into the docs folder
-        - name: content-volume
-          mountPath: /app/docs/index.md
-          subPath: index.md
+      initContainers:
+      - name: install-config
+        image: busybox
+        command: ['sh', '-c', 'cp /config-src/* /app/ && cp /docs-src/index.md /app/docs/index.md']
+          volumeMounts:
+          - name: mkdocs-dev-storage
+            mountPath: /app
+          # 2. Inject the config file
+          - name: content-volume
+            mountPath: /app/mkdocs.yml
+            subPath: mkdocs.yml
+          # 3. Inject the home page into the docs folder
+          #- name: content-volume
+          #  mountPath: /app/docs/index.md
+          #  subPath: index.md
       volumes:
       - name: mkdocs-dev-storage
         persistentVolumeClaim:
