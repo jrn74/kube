@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mkdocs-site-content
+  namespace: mkdocs-dev
+data:
+  mkdocs.yml: |
+    site_name: K3s Managed Docs
+    theme:
+      name: readthedocs
+    nav:
+      - Home: index.md
+  index.md: |
+    # Welcome to my K3s MkDocs
+    This page is being served directly from a **Kubernetes ConfigMap**.
+
+    ### Cluster Info
+    - **Namespace:** mkdocs-ns
+    - **Storage:** HostPath PV
