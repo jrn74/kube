@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mkdocs-dev-deployment
+  namespace: mkdocs-dev
+  labels:
+    app: mkdocs-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mkdocs-dev
+  template:
+    metadata:
+      labels:
+        app: mkdocs-dev
+    spec:
+      containers:
+      - name: mkdocs
+        image: minidocks/mkdocs
+        # Equivalent to -w /app/doc
+        workingDir: /app
+        # Equivalent to the command and arguments at the end of docker run
+        args: ["serve", "-a", "0.0.0.0:8000", "-t", "readthedocs"]
+        ports:
+        - containerPort: 8000
+          name: http
+        volumeMounts:
+        - name: mkdocs-dev-storage
+          mountPath: /app
+        # 2. Inject the config file
+        ##- name: content-volume
+        ##  mountPath: /app/mkdocs.yml
+        ##  subPath: mkdocs.yml
+        # 3. Inject the home page into the docs folder
+        ##- name: content-volume
+        ##  mountPath: /app/docs/index.md
+        ##  subPath: index.md
+      volumes:
+      - name: mkdocs-dev-storage
+        persistentVolumeClaim:
+          claimName: mkdocs-dev-pvc
+      - name: content-volume
+        configMap:
+          name: mkdocs-site-content
+        #hostPath:
+          # Replace this with the absolute path to your documentation folder
+          #path: /absolute/path/to/your/docs
