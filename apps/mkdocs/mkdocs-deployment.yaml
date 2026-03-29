@@ -30,23 +30,26 @@ spec:
         image: busybox
         command: ['sh', '-c', 'cp /config-src/* /app/ && cp /docs-src/index.md /app/docs/index.md']
           volumeMounts:
-          - name: mkdocs-dev-storage
+          - name: mkdocs-storage
             mountPath: /app
           # 2. Inject the config file
-          - name: content-volume
+          - name: mkdocs-config
             mountPath: /app/mkdocs.yml
             subPath: mkdocs.yml
           # 3. Inject the home page into the docs folder
-          #- name: content-volume
-          #  mountPath: /app/docs/index.md
-          #  subPath: index.md
+          - name:  mkdocs-content
+            mountPath: /app/docs/index.md
+            subPath: index.md
       volumes:
-      - name: mkdocs-dev-storage
+      - name: mkdocs-storage
         persistentVolumeClaim:
           claimName: mkdocs-dev-pvc
-      - name: content-volume
+      - name: mkdocs-config
         configMap:
-          name: mkdocs-site-content
+          name: mkdocs-config-map
+      - name: mkdocs-content
+        configMap:
+          name: mkdocs-content-map
         #hostPath:
           # Replace this with the absolute path to your documentation folder
           #path: /absolute/path/to/your/docs
