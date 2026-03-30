@@ -18,28 +18,21 @@ spec:
       containers:
       - name: mkdocs
         image: minidocks/mkdocs
-        # Equivalent to -w /app/doc
         workingDir: /app
-        # Equivalent to the command and arguments at the end of docker run
         args: ["serve", "-a", "0.0.0.0:8000", "-t", "readthedocs"]
         ports:
         - containerPort: 8000
           name: http
-      initContainers:
-      - name: install-config
-        image: busybox
-        command: ['sh', '-c', 'cp /config-src/* /app/ && cp /docs-src/index.md /app/docs/index.md']
-          volumeMounts:
-          - name: mkdocs-storage
-            mountPath: /app
-          # 2. Inject the config file
-          - name: mkdocs-config
-            mountPath: /app/mkdocs.yml
-            subPath: mkdocs.yml
-          # 3. Inject the home page into the docs folder
-          - name:  mkdocs-content
-            mountPath: /app/docs/index.md
-            subPath: index.md
+        volumeMounts:
+        - name: mkdocs-storage
+          mountPath: /app
+        # Using subPath to inject specific files into the mounted PVC directory
+        - name: mkdocs-config
+          mountPath: /app/mkdocs.yml
+          subPath: mkdocs.yml
+        - name: mkdocs-content
+          mountPath: /app/docs/index.md
+          subPath: index.md
       volumes:
       - name: mkdocs-storage
         persistentVolumeClaim:
@@ -50,6 +43,3 @@ spec:
       - name: mkdocs-content
         configMap:
           name: mkdocs-content-map
-        #hostPath:
-          # Replace this with the absolute path to your documentation folder
-          #path: /absolute/path/to/your/docs
