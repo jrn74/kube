@@ -33,9 +33,6 @@ spec:
         - name: mkdocs-content
           mountPath: /app/docs/index.md
           subPath: index.md
-      -env:
-        - name: AUTO_UPDATE
-          value: 'true'
       volumes:
       - name: mkdocs-storage
         persistentVolumeClaim:
