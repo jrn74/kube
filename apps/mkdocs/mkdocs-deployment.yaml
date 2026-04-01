@@ -32,7 +32,7 @@ spec:
           subPath: mkdocs.yml
         - name: mkdocs-content
           mountPath: /app/docs/index.md
-          subPath: index.md
+          #subPath: index.md
       volumes:
       - name: mkdocs-storage
         persistentVolumeClaim:

@@ -9,14 +9,14 @@ data:
     theme:
       name: readthedocs
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mkdocs-content-map
-  namespace: mkdocs-dev
-data:
-  index.md: "# Home Page\nWelcome!"
-  about.md: "# About\nCreated with multiple ConfigMaps."
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#  name: mkdocs-content-map
+#  namespace: mkdocs-dev
+#data:
+#  index.md: "# Home Page\nWelcome!"
+#  about.md: "# About\nCreated with multiple ConfigMaps."
 #   - Home: index.md
 #  index.md: |
 #    # Welcome to my K3s MkDocs
