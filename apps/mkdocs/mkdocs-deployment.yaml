@@ -30,9 +30,9 @@ spec:
         - name: mkdocs-config
           mountPath: /app/mkdocs.yml
           subPath: mkdocs.yml
-        - name: mkdocs-content
-          mountPath: /app/docs/index.md
-          #subPath: index.md
+        #- name: mkdocs-content
+        #  mountPath: /app/docs/index.md
+        #  #subPath: index.md
       volumes:
       - name: mkdocs-storage
         persistentVolumeClaim:
@@ -40,6 +40,6 @@ spec:
       - name: mkdocs-config
         configMap:
           name: mkdocs-config-map
-      - name: mkdocs-content
-        configMap:
-          name: mkdocs-content-map
+      #- name: mkdocs-content
+      #  configMap:
+      #    name: mkdocs-content-map
