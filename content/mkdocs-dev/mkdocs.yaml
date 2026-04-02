@@ -3,4 +3,4 @@ theme:
   name: readthedocs
 nav:
   - Home: index.md
-  - Kubernetes: docs/kubernetes/jeroen.md
+  - Kubernetes: kubernetes/jeroen.md
