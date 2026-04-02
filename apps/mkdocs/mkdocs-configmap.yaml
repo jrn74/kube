@@ -1,13 +1,13 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mkdocs-config-map
-  namespace: mkdocs-dev
-data:
-  mkdocs.yml: |
-    site_name: K3s Managed Docs
-    theme:
-      name: readthedocs
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#  name: mkdocs-config-map
+#  namespace: mkdocs-dev
+#data:
+#  mkdocs.yml: |
+#    site_name: K3s Managed Docs
+#    theme:
+#      name: readthedocs
 ---
 #apiVersion: v1
 #kind: ConfigMap
