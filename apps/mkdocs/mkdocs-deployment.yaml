@@ -27,9 +27,9 @@ spec:
         - name: mkdocs-storage
           mountPath: /app
         # Using subPath to inject specific files into the mounted PVC directory
-        - name: mkdocs-config
-          mountPath: /app/mkdocs.yml
-          subPath: mkdocs.yml
+        #- name: mkdocs-config
+        #  mountPath: /app/mkdocs.yml
+        #  subPath: mkdocs.yml
         #- name: mkdocs-content
         #  mountPath: /app/docs/index.md
         #  #subPath: index.md
@@ -37,9 +37,9 @@ spec:
       - name: mkdocs-storage
         persistentVolumeClaim:
           claimName: mkdocs-dev-pvc
-      - name: mkdocs-config
-        configMap:
-          name: mkdocs-config-map
+      #- name: mkdocs-config
+      #  configMap:
+      #    name: mkdocs-config-map
       #- name: mkdocs-content
       #  configMap:
       #    name: mkdocs-content-map
